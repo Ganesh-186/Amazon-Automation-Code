@@ -1,0 +1,20 @@
+import {test, chromium} from '@playwright/test';
+
+test('Locators', async()=>{
+    const browser = await chromium.launch();
+    const context = await browser.newContext({
+        recordVideo:{dir:'./Video/'}
+    });
+    const page = await context.newPage();
+
+    await page.goto('https://www.amazon.in/');
+    await page.locator('#twotabsearchtextbox').fill('iphone');
+
+    const page2 = await context.newPage();
+    await page2.goto('https://www.flipkart.com/');
+
+    const context2 = await browser.newContext();
+    const page3 = await context2.newPage();
+
+    await page3.goto('http://www.facebook.com')
+})
